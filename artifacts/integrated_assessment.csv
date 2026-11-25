@@ -1,0 +1,2 @@
+baseline_error_rate_pct,recent_error_rate_pct,error_change_percentage_points,baseline_latency_ms,recent_latency_ms,latency_change_ms,error_drift,latency_drift,worsening_drift,total_anomalies,recent_anomalies,system_state
+2.259137858622685,1.745949791385102,-0.513188067237583,30.793329897063483,31.180244273109587,0.38691437604610357,false,false,false,7,0,STABLE

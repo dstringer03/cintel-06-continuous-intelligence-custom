@@ -184,3 +184,18 @@ Prediction: I expected a new rolling_error_rate_5 column, with the first four va
 Result: The pipeline processed 60 records and saved artifacts/rolling_signals.csv. The first four rolling values were blank, and the first complete average was approximately 1.76%. The anomaly count remained 7.
 
 I learned how to add rolling monitoring to the existing pipeline. The rolling calculation assumes the CSV rows are in observation order because this file has no timestamps. It does not change the existing system classification rules.
+## D3: Integrated Reliability Monitoring
+
+My custom application combines signals, anomaly detection, five-observation rolling averages, and baseline comparisons.
+
+Run it from the project root:
+
+    uv run python -m cintel.integrated_monitor
+
+It saves integrated_signals.csv, integrated_anomalies.csv, and integrated_assessment.csv in artifacts/. It also creates docs/images/integrated-monitoring.svg.
+
+The recent error rate improved from 2.26% to 1.75%. Average latency increased slightly from 30.79 to 31.18 milliseconds. Neither drift threshold was exceeded.
+
+The assessment was STABLE, with 7 anomalies overall and none in the recent 20 observations.
+
+[Read the full report and view the chart](docs/index.md)
