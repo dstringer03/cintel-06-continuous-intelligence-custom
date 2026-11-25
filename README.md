@@ -175,3 +175,12 @@ The project uses Zensical and GitHub Pages to publish documentation.
 - [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/)
 - [Citation](CITATION.cff)
 - [License](LICENSE)
+## D2 Experiment: Adding Rolling Error Rates
+
+I added a five-observation rolling average of error_rate using the rolling monitoring technique from Module 4.
+
+Prediction: I expected a new rolling_error_rate_5 column, with the first four values blank because a complete window needs five observations.
+
+Result: The pipeline processed 60 records and saved artifacts/rolling_signals.csv. The first four rolling values were blank, and the first complete average was approximately 1.76%. The anomaly count remained 7.
+
+I learned how to add rolling monitoring to the existing pipeline. The rolling calculation assumes the CSV rows are in observation order because this file has no timestamps. It does not change the existing system classification rules.

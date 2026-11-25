@@ -134,6 +134,14 @@ def main() -> None:
 
     df = design_signals(df)
 
+    # Calculate a trailing average using five observations.
+    df = df.with_columns(
+        pl.col("error_rate").rolling_mean(5).alias("rolling_error_rate_5")
+    )
+
+    rolling_file = ARTIFACTS_DIR / "rolling_signals.csv"
+    df.write_csv(rolling_file)
+    LOG.info(f"Saved rolling signals: {rolling_file}")
     # ----------------------------------------------------
     # STEP 3: DETECT ANOMALIES
     # ----------------------------------------------------
