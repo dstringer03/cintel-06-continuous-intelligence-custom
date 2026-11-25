@@ -1,70 +1,69 @@
-# cintel-06-continuous-intelligence
+# cintel-06-continuous-intelligence-custom
 
 [![Python 3.14](https://img.shields.io/badge/python-3.14%2B-blue?logo=python)](pyproject.toml)
-[![CI](https://github.com/denisecase/cintel-06-continuous-intelligence/actions/workflows/ci-python-zensical.yml/badge.svg)](https://github.com/denisecase/cintel-06-continuous-intelligence/actions/workflows/ci-python-zensical.yml)
-[![Documentation](https://img.shields.io/badge/docs-site-blue?logo=github)](https://denisecase.github.io/cintel-06-continuous-intelligence/)
-
-[![uv managed](https://img.shields.io/badge/uv-managed-DE5FE9)](https://docs.astral.sh/uv/)
-[![ty type checked](https://img.shields.io/badge/ty-type_checked-2F80ED)](https://docs.astral.sh/ty/)
-[![Zensical docs](https://img.shields.io/badge/Zensical-docs-purple)](https://zensical.org/)
-[![MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/dstringer03/cintel-06-continuous-intelligence-custom/actions/workflows/ci-python-zensical.yml/badge.svg)](https://github.com/dstringer03/cintel-06-continuous-intelligence-custom/actions/workflows/ci-python-zensical.yml)
+[![Documentation](https://img.shields.io/badge/docs-site-blue?logo=github)](https://dstringer03.github.io/cintel-06-continuous-intelligence-custom/)
 
 > Combine monitoring signals and anomaly detection to assess system health.
 
 ## Project Overview
 
-Author: Denise Case
+Author: Darrion Maurice Stringer
 
-Date: 2026 October
+Date: 2026-11
 
-This project brings together techniques introduced
-throughout the Continuous Intelligence course.
+Based on the example project by Denise Case.
 
-The goal is to transform system measurements into useful signals,
-identify unusual behavior, and summarize the system's current state.
-
-The project is configured in
-[pyproject.toml](pyproject.toml).
+I am learning how to combine monitoring techniques into one system assessment. My planned customization will bring together signals, anomaly detection, rolling monitoring, and drift comparisons from earlier projects.
 
 ## Data
 
-The example uses system metrics from `data/`.
+The example uses stored system measurements from the data folder.
 
 Each observation includes:
 
-- `requests` - number of requests handled.
-- `errors` - number of failed requests.
-- `total_latency_ms` - total response time in milliseconds.
-
-The example uses stored observations to demonstrate
-an integrated monitoring assessment.
+- requests: number of requests handled.
+- errors: number of failed requests.
+- total_latency_ms: total response time in milliseconds.
 
 ## Approach
 
-The pipeline uses Polars to:
+The example pipeline uses Python and Polars to:
 
 1. Read system measurements.
 2. Calculate error rate and average latency.
-3. Identify signals exceeding defined thresholds.
+3. Identify observations exceeding defined thresholds.
 4. Summarize system behavior.
-5. Assign a system assessment based on the monitored signals.
+5. Classify the overall system as STABLE or DEGRADED.
 
-Explore these project components:
+Rolling monitoring and baseline drift comparisons are planned additions for my custom application.
 
-- [pyproject.toml](pyproject.toml) - project configuration and dependencies.
-- [src/cintel/continuous_intelligence.py](src/cintel/continuous_intelligence.py) - integrated monitoring pipeline.
-- [data/](data/) - system measurements.
-- [artifacts/](artifacts/) - generated system assessment.
-- [tests/](tests/) - automated tests.
-- [.github/workflows/](.github/workflows/) - automated checks and documentation deployment.
-- [docs/](docs/) - project documentation.
+## Project Files
+
+- [pyproject.toml](pyproject.toml): project configuration and dependencies.
+- [continuous_intelligence.py](src/cintel/continuous_intelligence.py): monitoring pipeline.
+- [data](data/): input measurements.
+- [artifacts](artifacts/): generated results.
+- [tests](tests/): automated tests.
+- [docs](docs/): project documentation.
+- [zensical.toml](zensical.toml): documentation configuration.
+
+## Set Up the Environment
+
+Follow the [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/) for machine setup.
+
+Open a terminal in the project root and run each command separately:
+
+```shell
+uv self update
+uv python pin 3.14
+uv python install
+uv sync
+```
 
 ## Run the Project
 
-Follow the [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/)
-to set up your machine and project environment.
-
-From a VS Code terminal in the project root:
+From the project root:
 
 ```shell
 uv run python -m cintel.continuous_intelligence
@@ -72,148 +71,107 @@ uv run python -m cintel.continuous_intelligence
 
 ## Run the Reactive App
 
-From a VS Code terminal in the project root
-(hit CTRL + c to quit):
-
 ```shell
-uv run marimo run  src/cintel/app.py
+uv run marimo run src/cintel/app.py
 ```
 
-## Results
+Press Control + C in the terminal to stop the app.
 
-The pipeline summarizes the monitored signals
-and writes `artifacts/system_assessment.csv`.
-Review the resulting system assessment and explain
-which signals support the reported state.
+## Expected Results
 
-The example classifies the system state as:
+The pipeline saves its summary to:
 
-- **STABLE** - summary signals remain within the defined thresholds.
-- **DEGRADED** - one or more summary signals exceed the defined thresholds.
+```text
+artifacts/system_assessment.csv
+```
 
-Successful execution produces a terminal message:
+The system assessment uses these labels:
 
-```shell
-========================
+- STABLE: neither summary signal exceeds its configured threshold.
+- DEGRADED: at least one summary signal exceeds its configured threshold.
+
+Successful execution displays:
+
+```text
 Pipeline executed successfully!
-========================
 ```
 
-A `project.log` file is created in the project root.
+The pipeline also creates a project.log file.
 
-This confirms that the Python pipeline executes
-and the logging system works.
+An overall STABLE result does not mean every individual observation is within the thresholds.
 
 ## Verification
 
-Run the automated tests:
+Run the tests:
 
 ```shell
 uv run pytest
 ```
 
-## Project Documentation
-
-The [hosted documentation site](https://denisecase.github.io/cintel-06-continuous-intelligence/)
-is published using Zensical and GitHub Pages.
-
-The documentation site is used to present the project report,
-covering such sections as data, methods, results, visualizations,
-interpretation, and conclusions.
-
-## CI/CD and GitHub Actions
-
-This project includes continuous integration and continuous deployment (CI/CD)
-to check project files and publish the docs.
-GitHub Actions include:
-
-- [CI: Python and Documentation Checks](https://github.com/denisecase/cintel-06-continuous-intelligence/actions/workflows/ci-python-zensical.yml)
-- [CD: Documentation Deployment](https://github.com/denisecase/cintel-06-continuous-intelligence/actions/workflows/deploy-zensical.yml)
-
-## Developer Reference
-
-Follow the
-[Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/)
-for **detailed instructions and troubleshooting**.
-
-### Initialize and Update the Python Environment
-
-With the project open in VS Code, open a VS Code terminal.
-Paste each command and hit Enter or Return after to run it.
+Build the documentation:
 
 ```shell
-uvx pup-clean --delete
-uv self update
-uv python pin 3.14
-uv python install
-uv lock --upgrade
-uv sync
-uv audit
+uv run python -m zensical build
 ```
 
-### Set Up and Run Git Hooks
+## Set Up Git Hooks
 
-Set up and run the git hooks to perform
-basic checks automatically before
-any changes get pushed to GitHub.
-
-In the VS Code terminal,
-paste each command and hit Enter or Return after to run it.
+Run each command separately:
 
 ```shell
 uvx prek install --force
 uvx prek update --freeze --cooldown-days 7
-
 git add -A
-uvx prek run --all-files
-# repeat if changes were made
 uvx prek run --all-files
 ```
 
-### Run Common Chores
+If a hook changes files, review the changes, stage them again, and rerun the checks.
 
-Run linters, formatters, type checks, tests, and
-build the documentation.
+## Development Checks
 
 ```shell
-uv run ruff check . --fix
+uv run ruff check .
 uv run ruff format .
-
 uv run ty check
-uv run python -m pytest
+uv run pytest
 uv run python -m zensical build
 ```
 
-### Git add-commit-push to GitHub
-
-After making useful changes, save your work to GitHub.
+## Save Changes to GitHub
 
 ```shell
 git add -A
-git commit -m "describe your changes in quotes"
-git push -u origin main
+git commit -m "Describe the changes"
+git push
 ```
 
-## Developer Notes
+## Documentation and Automated Checks
 
-- Use the **UP ARROW** and **DOWN ARROW** in the terminal to scroll through past commands.
-- Use `CTRL+f` to find (and replace) text within a file.
+The project uses Zensical and GitHub Pages to publish documentation.
 
-## Developer Tools
+- [Hosted Documentation](https://dstringer03.github.io/cintel-06-continuous-intelligence-custom/)
+- [Python and Documentation Checks](https://github.com/dstringer03/cintel-06-continuous-intelligence-custom/actions/workflows/ci-python-zensical.yml)
+- [Documentation Deployment](https://github.com/dstringer03/cintel-06-continuous-intelligence-custom/actions/workflows/deploy-zensical.yml)
 
-This project uses professional Python tools to support development,
-testing, documentation, and code quality.
+## Tools
 
-- [uv](https://docs.astral.sh/uv/) - Python environments and dependencies.
-- [Ruff](https://docs.astral.sh/ruff/) - Python linting and formatting, configured in [.ruff.toml](.ruff.toml).
-- [ty](https://docs.astral.sh/ty/) - Python type checking.
-- [pytest](https://docs.pytest.org/) - automated Python testing, configured in [.pytest.toml](.pytest.toml).
-- [prek](https://prek.j178.dev/) - Git hooks and automated checks, configured in [prek.toml](prek.toml).
-- [Zensical](https://zensical.org/) - project documentation, configured in [zensical.toml](zensical.toml).
+- Python: application code.
+- Polars: data processing.
+- datafun-toolkit: logging.
+- marimo: reactive application.
+- uv: Python environment and dependencies.
+- Ruff: formatting and linting.
+- ty: type checking.
+- pytest: automated tests.
+- prek: Git hooks.
+- Zensical: documentation.
+- Git and GitHub: version control and sharing.
 
 ## Links
 
-- [Hosted Documentation](https://denisecase.github.io/cintel-06-continuous-intelligence/)
+- [My Repository](https://github.com/dstringer03/cintel-06-continuous-intelligence-custom)
+- [Hosted Documentation](https://dstringer03.github.io/cintel-06-continuous-intelligence-custom/)
+- [Original Example](https://github.com/denisecase/cintel-06-continuous-intelligence)
 - [Professional Python Workflow Guide](https://denisecase.github.io/pro-analytics-02/)
 - [Citation](CITATION.cff)
 - [License](LICENSE)
